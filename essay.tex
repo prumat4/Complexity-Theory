@@ -4,14 +4,16 @@
 \usepackage[T1]{fontenc} 
 \usepackage{xcolor}
 \usepackage[english,ukrainian]{babel}
-
-\usepackage{mathpazo}
-\usepackage{blindtext}
+\usepackage{tempora}
+\usepackage{lipsum}
+\usepackage{setspace}
 \usepackage{geometry}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
  \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
 \pagenumbering{arabic}
 \begin{document}
-	
+\begin{spacing}{1.175}	
 	\begin{titlepage} 
 		\newcommand{\HRule}{\rule{\linewidth}{0.3mm}}
 		\center 
@@ -26,125 +28,42 @@
 		
 		\HRule\\[0.4cm]
 		
-		{\huge\bfseries \textcolor{red}{\textbf{Задача визначення того, чи даний граф\\не має циклу Гамільтона}}}\\[0.4cm]
+		{\huge \textcolor{blue}{Задача визначення того, чи даний граф\\
+            не має циклу Гамільтона}}\\[0.4cm]
 		
 		\HRule\\[1.5cm]
 		\textsc{\large ФІ-13 Дідух Максим}\\[0.5cm]
 		
-		\vspace{8.5cm}
+		\vspace{7.5cm}
 		
-		\textsc{\Large Фізико-технічний інститут}\\[0.5cm]
+		\textsc{\large Фізико-технічний інститут}\\[0.5cm]
 		\textsc{\large Кафедра математичних методів захисту інформації}\\[0.5cm]
 		{\large {2022}} 
 	\end{titlepage}
     
     \newpage
     \title{\Large Дослідження \(coNP\)-повної задачі}
-    \author{Дідух Максим}
-    \date{7 грудня 2022}
+    \date{\large 7 грудня 2022}
     \maketitle
-    \tableofcontents
+    \tableofcontents                                                                            % HOW TO CHANGE THICKNESS here and in numbering????????? 
     \newpage
-    \section{Вступ}
-        \subsection{Постановка задачі}
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
-        \subsection{Історія виникнення та наявні її модифікації}
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
+    \section{\normalfontВступ}
+\quadГраф називається \textit{гамільтоновим}, якщо існує цикл, що містить кожну вершину рівно один раз. Такий цикл носить назву гамільтонового.
+Поняття пішло від Вільям Гамільтон (англ. \textit{William Hamiltonian}), який вигадав не дуже вдалу гру під назвою "ікосіанська гра" (англ. \textit{"icosian game"}), завданням якої був пошук гамільтонового циклу на додекаедричному графі (і можливо на його підграфах).
+\parХоча означення гамільтонового графу дуже схоже з означенням ойлерового графу, виявляється, що ці дві концепції поводяться досить по-різному. Якщо теорема Ойлера дає нам чіткий критерій ойлеровості, то для гамільтонових графів немає аналогічного твердження. Як з'ясувалось, перевірка графу на гамільтовість є \(NP\)-повною задачею.
+%%\includegraphics{dodecahedron-modified}
+        \subsection{\normalfontПостановка задачі}
+        \subsection{\normalfontІсторія виникнення та наявні її модифікації}
     
-    \section{Практичне застосування}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
-    \section{Доведення складності}Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
+    \section{\normalfontПрактичне застосування}
+    
+    \section{\normalfontДоведення складності}
 
-    \section{Розв'язок}
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
-        \subsection{Наявні методи розв'язку}Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
-        \subsection{Наявні ефективні часткові розв'язки задачі та модифікацій}Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibu-
-lum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
-Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
+    \section{\normalfontРозв'язок}
+        \subsection{\normalfontНаявні методи розв'язку}
+        \subsection{\normalfontНаявні ефективні часткові розв'язки задачі та модифікацій}
 
-    \section{Список використаної літератури}
+    \section{\normalfontСписок використаної літератури}
 
     \newpage
     
@@ -155,5 +74,5 @@ Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna.
 
 
     
-	
+	\end{spacing}
 \end{document}
