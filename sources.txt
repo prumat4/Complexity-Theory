@@ -12,5 +12,10 @@ https://math.stackexchange.com/questions/458306/non-hamiltonian-cycles-how-to-pr
 https://mathworld.wolfram.com/NonhamiltonianGraph.html
 https://www.sciencedirect.com/science/article/pii/S0166218X16300610
 
+
+чатскові випадки https://mathworld.wolfram.com/NonhamiltonianGraph.html
+доведення hamilton path http://www.cs.toronto.edu/~ashe/ham-path-notes.pdf
 add english version
+
+
 
