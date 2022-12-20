@@ -8,6 +8,8 @@
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning}
 \graphicspath{ {./images/} }
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm,}
 \pagenumbering{arabic}
@@ -65,6 +67,7 @@
         \newcommand{\hamcycle}{\textit{HAM-CYCLE }}
         \newcommand{\dhampath}{\textit{D-HAM-PATH }}
         \newcommand{\tsat}{\textit{3SAT }}
+        \newcommand{\bolddot}{\textbf{.}}
 
         
         \subsection{\normalfontПостановка задачі}
@@ -187,13 +190,15 @@
     
     
     \section{\normalfontДоведення складності}
-    \quad Доведемо, що \nonhamcycle є \(coNP\)-повною. Для цього нам знадобиться довести додаткове твердження. \\\\
+    \textcolor{blue}{fix squares}\\
+    
+    Доведемо, що \nonhamcycle є \(coNP\)-повною. Для цього нам знадобиться довести додаткове твердження. \\\\
     \textbf{Твердження 1:} задача перевірки графа на наявність гамільтонового циклу належить класу \(NP\)-повних задач (\textit{далі:} \hamcycle)\\
+    
     \rule{0.7em}{0.7em}\\
     Спочатку покажемо, що задача перевірки орієнтованого графу на наявність гамільтоновго шляху з вершини \(s\) у вершину \(t\) (далі \dhampath)  є \(NP\)-повною.
-    \\ 
-    
-    \quad 1. \dhampath \(\epsilon\) \(NP\)-повна?\\
+
+    1. \dhampath \(\epsilon\) \(NP\)-повна?\\
     Нехай \(G\) — орієнтований граф. Ми можемо перевірити чи потенційний шлях \(s \to \dots \to t\) є гамільтоновим за поліноміальний час. Тепер спробуємо побудувати поліноміальне зведення \tsat \(\le_p\) \dhampath, щоб закінчити доведення повноти.
     \\
     \textcolor{blue}{а точно 'множник'?}\\
@@ -261,11 +266,128 @@
             \item Припустимо, що граф \(G\) містить гамільтонів шлях \(P\), який починається у випадковій вершині, позначимо її як \(v_{start}\) та закінчується у вершині \(v_{end}\). Тепер, оскільки ми поєднали усі вершини з множини \(V\) з вершиною \(v_{new}\), ми можемо розширити гамільтонів шлях \(P\) о гамільтонового циклу, використовуючи ребра \(v_{end}\, v_{new}\) та \(v_{new}\, v_{start}\) відповідно. Тепер граф \(G`\), який містить усі вершини рівно один раз.
             \item Ми припускаємо, що граф \(G`\) містить гамільтонів цикл, який проходить через усі вершини, включаючи \(v_{new}\). Тепер, щоб перетворити цей цикл на гамільтонів шлях, ми видаляємо усі ребра (у циклі), що містять вершину \(v_{new}\). Отриманий шлях буде покривати усі вершини з множини \(V\) і будуть робити це рівно один раз.
         \end{enumerate}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         \begin{center}
-        \includegraphics{images/sol11.png} \\
-        \text{мал. 2 побудова}
+        \tikzset{
+            circle node/.style={
+            circle,
+            draw,
+            fill=white,
+            minimum size=1.3cm
+            }
+        }
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style = {circle, thick, draw, minimum size = 2.7em, fill = gray!40}, edge_style/.style={draw=black, ultra thick}]
+            \node (s) at (-9,0) {s};
+            %row 1
+            \node (v_{1,0}) at (-15,-3) {\(v_{1,0  }\)};
+            \node (v_{1,1}) at (-12.5,-3) {\(v_{1,1}\)};
+            \node (v_{1,2}) at (-10,-3) {\(v_{1,2}\)};
+            \node[draw = white, fill = white] (d1) at (-7.5,-3) {. . . };
+            \node (v1) at (-5, -3) {};
+            \node (v_{1,2m+1}) at (-2.5,-3) {\(v_{1,2m+1}\)};
+            %row 2
+            \node (v_{2,0}) at (-15, -7) {\(v_{2,0}\)};
+            \node (v_{2,1}) at (-12.5,-7) {\(v_{2,1}\)};
+            \node (v_{2,2}) at (-10,-7) {\(v_{2,2}\)};
+            \node[draw = white, fill = white] (d2) at (-7.5,-7) {. . . };
+            \node (v2) at (-5, -7) {};
+            \node (v_{2,2m+1}) at (-2.5,-7) {\(v_{2,2m+1}\)};
+            %row 3
+            \node (v_{3,0}) at (-15,-10) {\(v_{3,0}\)};
+            \node[draw = white, fill = white] (d3) at (-6.5,-10) {\dots};
+            \node[draw = white, fill = white] (d3) at (-11,-10) {\dots};
+            \node (v_{3,2m+1}) at (-2.5,-10) {\(v_{2,3m+1}\)};            
+            
+            %\begin{scope}[every node/.style = {thick, draw}]
+                %\node (1) at (0, 3) {\ldots};
+            %\end{scope}
+            
+            %row n
+            \node (v_{n,0}) at (-15,-21) {\(v_{n,0}\)};
+            \node (v_{n,2m+1}) at (-2.5,-21) {\(v_{n,2m+1}\)};  
+            \node[draw = white, fill = white] (d3) at (-6.5,-21) {\dots};
+            \node[draw = white, fill = white] (d3) at (-11,-21) {\dots};
+            
+            %6 addition
+            \node (v_{i,2m-1}) at (-8,-13) {\(v_{i,2m-1}\)};
+            \node (v_{i,2m}) at (-5,-13) {\(v_{i,2m}\)};
+            
+            \node (v_{j,2m-1}) at (-8,-16) {\(v_{j,2m-1}\)};
+            \node (v_{j,2m}) at (-5,-16) {\(v_{j,2m}\)};
+
+            \node (v_{k,2m-1}) at (-8,-19) {\(v_{k,2m-1}\)};
+            \node (v_{k,2m}) at (-5,-19) {\(v_{k,2m}\)};
+
+
+            \node (c_1) at (1, -11) {\(c_1\)};
+            \node (c_2) at (1, -13) {\(c_2\)};
+            \node (c_m) at (1, -16) {\(c_m\)};
+            
+            \node (t) at (-9,-23) {t}; 
+
+            %vertical dots
+            \node[draw = white, fill = white] () at (-15, -14) {$.$};
+            \node[draw = white, fill = white] () at (-15, -14.5) {.};
+            \node[draw = white, fill = white] () at (-15, -15) {.};
+            \node[draw = white, fill = white] () at (-15, -15.5) {.};
+            \node[draw = white, fill = white] () at (-15, -16) {.};
+
+            \node[draw = white, fill = white] () at (-2.5, -14) {.};
+            \node[draw = white, fill = white] () at (-2.5, -14.5) {.};
+            \node[draw = white, fill = white] () at (-2.5, -15) {.};
+            \node[draw = white, fill = white] () at (-2.5, -15.5) {.};
+            \node[draw = white, fill = white] () at (-2.5, -16) {.};
+
+            \node[draw = white, fill = white] () at (1, -15) {.};
+            \node[draw = white, fill = white] () at (1, -14.5) {.};
+            \node[draw = white, fill = white] () at (1, -14) {.};
+
+            \path(v_{1,0})edge[black, bend left = 50, ->](v_{1,1});
+            \path(v_{1,0})edge[black, bend right = 50, <-](v_{1,1});
+            \path(v_{1,1})edge[black, bend left = 50, ->](v_{1,2});
+            \path(v_{1,1})edge[black, bend right = 50, <-](v_{1,2});
+            \path(v1)edge[black, bend left = 50, ->](v_{1,2m+1});
+            \path(v1)edge[black, bend right = 50, <-](v_{1,2m+1});
+    
+            \path(v_{2,0})edge[black, bend left = 50, ->](v_{2,1});
+            \path(v_{2,0})edge[black, bend right = 50, <-](v_{2,1});
+            \path(v_{2,1})edge[black, bend left = 50, ->](v_{2,2});
+            \path(v_{2,1})edge[black, bend right = 50, <-](v_{2,2});
+            \path(v2)edge[black, bend left = 50, ->](v_{2,2m+1});
+            \path(v2)edge[black, bend right = 50, <-](v_{2,2m+1});
+            
+            \path(v_{1,0})edge[black, bend right, ->](v_{2,0});
+            \path(v_{2,0})edge[black, bend right, ->](v_{3,0});
+            \path(s)edge[black, bend right, ->](v_{1,0});
+            \path(s)edge[black, bend left, ->](v_{1,2m+1});
+            \path(v_{1,2m+1})edge[black, bend left, ->](v_{2,2m+1});
+            \path(v_{2,2m+1})edge[black, bend left, ->](v_{3,2m+1});
+            \path(v_{1,2m+1})edge[black, bend right = 5, ->](v_{2,0});
+            \path(v_{1,0})edge[black, bend left = 5, ->](v_{2,2m+1});
+            \path(v_{2,2m+1})edge[black, bend left = 20, ->](v_{3,0});
+            \path(v_{2,0})edge[black, bend right = 20, ->](v_{3,2m+1});
+
+            \path(c_m)edge[black, bend left = 10, ->](v_{i,2m-1});
+            \path(v_{i,2m})edge[black, bend left = 10, ->](c_m);
+            
+            \path(c_m)edge[black, bend left = 20, ->](v_{j,2m-1});
+            \path(v_{j,2m})edge[black, bend left = 10, ->](c_m);
+            
+            \path(c_m)edge[black, bend right = 10, ->](v_{k,2m-1});
+            \path(v_{k,2m})edge[black, bend right = 10, ->](c_m);
+
+            \path(v_{n,0})edge[black, bend right, ->](t);
+            \path(v_{n,2m+1})edge[black, bend left,  ->](t);
+            
+        \end{scope}
+        \end{tikzpicture}
         \end{center}
+        
+        \begin{center}
+        \text{мал. 2 зведення задачі \tsat до \dhampath}
+        \end{center}
+        \newpage
 
         \quad Тому ми можемо стверджувати, що граф \(G'\) містить гамільтонів цикл, якщо граф \(G\) містить гамільтонів шлях. Отже, довільний екземпляр задачі \hamcycle зводить до екземпляру задачі \dhampath. З чого можна зробити висновок, що \hamcycle є \(NP\)-складною.\\
         
