@@ -18,7 +18,7 @@
 \fancyhf{}
 \fancyhead[R]{\thepage}
 \fancyheadoffset[L]{\sectionwidth}
-\fancyhead[L]{\textbf{\expandafter\textit{Теорія складності}}}
+\fancyhead[L]{\expandafter\textit{Теорія складності}}
 
 
 
@@ -38,7 +38,7 @@
 		
 		\HRule\\[0.4cm]
 		
-		{\huge \textcolor{blue}{Проблема негамільтонового циклу}}\\[0.4cm]
+		{\huge \text{Проблема негамільтонового циклу}}\\[0.4cm]
 		
 		\HRule\\[1.5cm]
 		\textsc{\large ФІ-13 Дідух Максим}\\[0.5cm]
@@ -64,7 +64,41 @@
         \\
         \quad Взагалі, це поняття пішло від Вільям Гамільтон (англ. \textit{William Hamiltonian}), який вигадав не дуже вдалу гру під назвою "ікосіанська гра" (англ. \textit{"icosian game"}), завданням якої був пошук гамільтонового циклу на додекаедричному графі (і можливо на його підграфах). \\
         \begin{center}
-        \includegraphics{images/dod(200x200)-modified.png} \\
+        \tikzset{unode/.style = {
+                circle, 
+                draw=gray!40!black, 
+                thick,
+                fill=gray!40!,
+                inner sep=2.3pt,
+                minimum size=2.3pt } }
+        \tikzset{uedge/.style = {
+            draw=cyan!20!black, 
+            very thick} }
+
+        \begin{tikzpicture}[scale=1.6 ]
+            \foreach \x in {0,1,2,3,4}{
+                \node[unode] (o\x) at (18+\x*72:2cm) {};
+                \node[unode] (i\x) at (18+\x*72:1.4cm) {};
+                \node[unode] (ii\x) at (54+\x*72:1cm) {};
+                \node[unode] (iii\x) at (54+\x*72:0.5cm) {};
+            }
+            \foreach \x in {0,1,2,3,4}{
+                \path[uedge] (o\x) edge (i\x); 
+                \path[uedge] (ii\x) edge (iii\x);
+            }
+            \path[uedge][red] (o0)--(o1)--(o2)--(o3)--(o4)--(o0);
+            \path[uedge] (o3)--(o4);
+            \path[uedge][red] (o4)--(i4);
+            \path[uedge][red] (iii0)--(iii1)--(iii2)--(iii3)--(iii4)--(iii0);
+            \path[uedge] (iii3)--(iii4);
+            \path[uedge][red] (ii4)--(iii4);
+            \path[uedge][red] (ii3)--(iii3);
+            \path[uedge][red] (i0)--(ii0)--(i1)--(ii1)--(i2)--(ii2)--(i3)--(ii3)--(i4)--(ii4)--(i0);
+            \path[uedge] (i3)--(ii3);
+            \path[uedge] (i4)--(ii4);
+
+        \end{tikzpicture} 
+        \\
         \text{мал. 1 \textit{гамільтоновий цикл на додекаедрі} \textcolor{blue}{\large change resolution}}
         \end{center}
         
@@ -284,7 +318,8 @@
             }
         }
         \begin{tikzpicture}
-        \begin{scope}[every node/.style = {circle, thick, draw, minimum size = 2.7em, fill = gray!40}, edge_style/.style={draw=black, ultra thick}]
+        \begin{scope}[every node/.style = {circle, thick, draw, minimum size = 2.7em, fill = gray!40}, edge_style/.style={draw = black, draw = bold}]
+            
             \node (s) at (-9,0) {s};
             %row 1
             \node (v_{1,0}) at (-15,-3) {\(v_{1,0  }\)};
@@ -293,6 +328,7 @@
             \node[draw = white, fill = white] (d1) at (-7.5,-3) {. . . };
             \node (v1) at (-5, -3) {};
             \node (v_{1,2m+1}) at (-2.5,-3) {\(v_{1,2m+1}\)};
+           
             %row 2
             \node (v_{2,0}) at (-15, -7) {\(v_{2,0}\)};
             \node (v_{2,1}) at (-12.5,-7) {\(v_{2,1}\)};
@@ -300,15 +336,12 @@
             \node[draw = white, fill = white] (d2) at (-7.5,-7) {. . . };
             \node (v2) at (-5, -7) {};
             \node (v_{2,2m+1}) at (-2.5,-7) {\(v_{2,2m+1}\)};
+           
             %row 3
             \node (v_{3,0}) at (-15,-10) {\(v_{3,0}\)};
             \node[draw = white, fill = white] (d3) at (-6.5,-10) {\dots};
             \node[draw = white, fill = white] (d3) at (-11,-10) {\dots};
             \node (v_{3,2m+1}) at (-2.5,-10) {\(v_{2,3m+1}\)};            
-            
-            %\begin{scope}[every node/.style = {thick, draw}]
-                %\node (1) at (0, 3) {\ldots};
-            %\end{scope}
             
             %row n
             \node (v_{n,0}) at (-15,-21) {\(v_{n,0}\)};
@@ -408,15 +441,37 @@
         
 
     \section{\normalfontРозв'язок}
-    \textcolor{red}{However, for some specific graph classes, there are well-known algorithms for finding solutions. For example, the minimal vertex cover problem for cubic graphs can be solved using the Blossom algorithm. For planar graphs, the Hamilton cycle problem can be solved in polynomial time using the Hopcroft–Tarjan algorithm. Additionally, applications of Approximation algorithms, such as the Christofides algorithm, offer good solutions for specific classes of graphs.}
-        \subsection{\normalfontНаявні методи розв'язку}
-        \subsection{\normalfontНаявні ефективні часткові розв'язки задачі та модифікацій}
+    \qquad Немає загального розв’язку проблеми негамільтонвого циклу для довільного графу. Однак для деяких конкретних класів графів існують добре відомі алгоритми пошуку рішень.
+    
+        \subsection{\normalfont Наявні ефективні часткові розв'язки задачі та модифікацій}
+            \subsubsection{\normalfont Теорема Ґрінберга}
+            \qquad В теорії графі, теорема Ґрінбенга є необхідною умовою для того, щоб планарний граф містив гамільтонів цикл, базуючись на довжинах лицьових циклів. Якщо граф не задовільняє цю умову, то він негамільтонів. Результат теореми широко використовувався для для доведедення того, що деякі планарні графи, побудовані з додатковими властивостями не є гамільтоновими. Наприклад, це може довести негамільтоновість деяких контрприкладів до гіпотези Тейта. Теорема названа вчесть латвійського математика Емануеля Ґрінбенга, який довів її в 1968 році.
+            \\
+
+            \textbf{Теорема Ґрінбенга:} Нехай \(G\) - скінченний планарний граф з гамільтоновим циклом \(C\), з фіксованим зображенням на площині. Тоді \(C\) \textit{розбиває} граф на зовнішню на внутрішню підмножини. Позначимо \(f_k\) і \(g_k\) - кількість \(k\)-кутних вершин, які є зовнішніми або внутршінми відносно циклу \(C\). 
+            
+            Тоді виконується співвідношення: $$ \sum_{k\ge3} (k - 2)(f_k - g_k) = 0 $$
+
+            Ґрінберг використовува свою теорему для знаходження негамільтонових циклів в кубічних поліедральних графах (планарний граф, в якому степінь кожної вершини дорівнює трьом) з високою циклічною зв'язністю ребер. Циклічна зв'язність ребер графа - це найменша кількість ребер, видалення яких залишає підграф з більш ніж однією циклічною компонентою. Граф Тутте з 46 вершинами та менші кубічні негамільтонові поліедральні графи, отримані з нього, мають циклічну реберну зв’язність рівну трьом. Грінберг використовував свою теорему, щоб знайти негамільтонів кубічний многогранний граф із 44 вершинами, 24 гранями та циклічною зв’язністю ребер рівній чотирьом, а також інший приклад із 46 вершинами, 25 гранями та циклічною зв’язністю ребер п’ять, максимальна можлива циклічна зв’язність ребер для кубічного плоского графа, відмінного від \(K_4\). У наведеному прикладі всі обмежені грані мають або п’ять, або вісім ребер, обидва з яких є числами 2 mod 3, але необмежена грань має дев’ять ребер, що не дорівнює 2 mod 3. Отже, згідно з теоремою Грінберга , граф не може бути гамільтоновим.
+            
+            \tikzstyle{every node}=[circle, draw, fill=black!50,
+                        inner sep=0pt, minimum width=4pt]
+            \begin{center}
+            \begin{tikzpicture}[thick,scale=0.4]
+                \node (1) at (0, 0) {};
+            \end{tikzpicture}
+            \end{center}
+            \subsubsection{\normalfontНаявні ефективні часткові розв'язки задачі та модифікацій 2}
+            \subsubsection{\normalfont Наявні ефективні часткові розв'язки задачі та модифікацій 3}
+            
+        
 
     \section{\normalfontСписок використаної літератури}
     \textcolor{blue}{чи доречно лишати лінки?}
     \begin{thebibliography}{9}
         \item Adrian She, \emph{Hamiltonian Path is NP-Complete}, 2020.
         \item Dan Archdeacon, \emph{An Historical Account of the Non-Hamiltonian Cycle Problem}.
+        \item Heping Jiang, \emph{Non-Hamilton cycle sets of having solutions and their properties}, 2019.
     \end{thebibliography}
 
 
